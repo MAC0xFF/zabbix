@@ -126,7 +126,7 @@ services:
       - web-nginx-pgsql
 
 networks:
-  zabbix:
+  zabbix_net:
     driver: bridge
 
 
