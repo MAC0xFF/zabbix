@@ -99,7 +99,6 @@ services:
     networks:
       - zabbix_net
 
-services:
   web:
     build: .
     command: 'bash -c ''node app.js'''
