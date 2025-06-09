@@ -99,28 +99,17 @@ services:
     networks:
       - zabbix_net
 
-  web:
-    build: .
-    command: 'bash -c ''node app.js'''
-    working_dir: /usr/src/app
-    environment:
-      PORT: 8050
-      NGINX_PORT: 8443
-    volumes:
-      - './views:/app/user/views:ro'
-      - ./nginx_conf:/etc/nginx/conf.d # Mount the Nginx configuration file
-      
   nginx:
-    build: nginx
+    image: nginx:latest
     ports:
-      - '8080:80'
-      - '8443:443'
-    links:
-      - web:web
-    volumes_from:
-      - web
+      - "80:80" # HTTP port
+      - "443:443" # HTTPS port (if enabled)
+    volumes:
+      - ./nginx_conf:/etc/nginx/conf.d # Mount the Nginx configuration file
     networks:
       - zabbix_net
+    depends_on:
+      - zabbix-web
 
 networks:
   zabbix_net:
