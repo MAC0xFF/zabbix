@@ -32,7 +32,7 @@ services:
     networks:
       - zabbix_net
 
-  web-nginx-pgsql:
+  zabbix-web:
     image: zabbix/zabbix-web-nginx-pgsql:alpine-latest
     ports:
       - "8080:8080"
@@ -123,7 +123,7 @@ services:
     networks:
       - zabbix_net
     depends_on:
-      - web-nginx-pgsql
+      - zabbix-web
 
 networks:
   zabbix_net:
